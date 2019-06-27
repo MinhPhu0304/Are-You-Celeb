@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.Dropzone {
+  width: '100%';
+  background-color: rgb(233, 231, 231);
+  color: rgb(23, 26, 207);
+  height: 100px
+}
+
+#uploadDesciption {
+  align-content: center;
+}
