@@ -23,16 +23,19 @@ class App extends React.Component {
     // Only 1 file is allowed so the array only has 1 element
     let image = file[0]
     let fileReader = new FileReader()
-    fileReader.readAsBinaryString(image)
-    fileReader.addEventListener('load', ({currentTarget}) => { // Nasty destructuring but it looks nice
-      const { result } = currentTarget
-      this.setState({startAnalyzingPic : !this.state.startAnalyzingPic})
-      setTimeout(() => this.setState({startAnalyzingPic: !this.state.startAnalyzingPic}),1000)
-      // TODO: Throw that to the back end using axios or what ever
+    fileReader.addEventListener('error', e => console.log(e))
+    fileReader.addEventListener('loadend', e => {
+      axios({
+        url: '/api/checkCeleb',
+        method: 'POST',
+        data: {
+          'imageBinary': fileReader.result
+        }
+      })
     })
+    this.setState({ startAnalyzingPic: true })
+    fileReader.readAsBinaryString(image)
   }
-
-
 
   render(){
     return (
