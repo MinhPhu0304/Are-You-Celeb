@@ -37,23 +37,24 @@ server.post('/api/checkCeleb', (req,res) => {
     request.post(option, ( error, respsonse, body) => {
         if(error) return console.log(error)
         const result = analyzeImageResult(JSON.parse(body))
-        res.send(result)
-        return res.sendStatus(200)
+        return res.status(200).send(result)
     })
 })
 
 analyzeImageResult = (result) => {
     const imageCategories = result.categories // This will return an array so watch out
     const peopleCategory = imageCategories.filter( element => element.name === 'people_' ) // The underscore is from Api result not me
+    let peopleDetail
+    let resultAnalyzed
     if(peopleCategory){
-        let peopleDetail = peopleCategory.detail
+        peopleDetail = peopleCategory.detail
     } 
 
-    return 'No people found'
-}
+    if(peopleDetail){
+        // Check if there is a field called celebrities
+    }
 
-isThisPersonACeleb = ( personDetail ) => {
-    // Check it here
+    return 'No people found'
 }
 
 server.listen(PORT, () => console.log(`Server is listerning on port ${PORT}`))

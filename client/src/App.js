@@ -34,7 +34,7 @@ class App extends React.Component {
         }
       })
       .then( res => {
-        this.setState({ isAnalyzingPic: !this.state.isAnalyzingPic }, () => this.setState({ analyzeResult: 'Done'}))
+        this.setState({ isAnalyzingPic: !this.state.isAnalyzingPic }, () => this.setState({ analyzeResult: res.data}))
       })
     })
     this.setState({ isAnalyzingPic: true })
