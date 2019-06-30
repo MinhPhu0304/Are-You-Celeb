@@ -15,7 +15,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      startAnalyzingPic: false
+      isAnalyzingPic: false,
+      analyzeResult: ''
     }
   }
 
@@ -32,8 +33,11 @@ class App extends React.Component {
           'imageBinary': fileReader.result
         }
       })
+      .then( res => {
+        this.setState({ isAnalyzingPic: !this.state.isAnalyzingPic }, () => this.setState({ analyzeResult: 'Done'}))
+      })
     })
-    this.setState({ startAnalyzingPic: true })
+    this.setState({ isAnalyzingPic: true })
     fileReader.readAsBinaryString(image)
   }
 
@@ -64,7 +68,10 @@ class App extends React.Component {
           </Box>
         </Grid>
         <Grid>
-          { this.state.startAnalyzingPic ? (<CircularProgress style={{margin: '10px'}}/>) : ''}
+          { this.state.isAnalyzingPic ? (<CircularProgress style={{margin: '10px'}}/>) : ''}
+        </Grid>
+        <Grid>
+          { this.state.analyzeResult === '' ? '' : <p>{this.state.analyzeResult}</p>}
         </Grid>
       </div>
     );

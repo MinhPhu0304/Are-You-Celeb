@@ -23,22 +23,25 @@ server.get('/', (req, res) => {
 server.post('/api/checkCeleb', (req,res) => {
     
     const base64Image = req.body.imageBinary
-    const shit = Buffer.from(base64Image, 'binary') // Convert binary string to buffer otherwise Azure will deny it
-    console.log(shit)
+    const imageBuffer = Buffer.from(base64Image, 'binary') // Convert binary string to buffer otherwise Azure will deny it
     const option = {
         uri: uriBase,
         qs: requestAnalyzeParam,
-        body: shit,
+        body: imageBuffer,
         headers: {
             'Content-Type': 'application/octet-stream',
             'Ocp-Apim-Subscription-Key' : AZURE_VISION_KEY
         }
     }
-    request.post(option, ( error, res, body) => {
+    request.post(option, ( error, respsonse, body) => {
         if(error) return console.log(error)
-        console.log(JSON.parse(body))
+        analyzeImageResult(body)
+        return res.sendStatus(200)
     })
-    return res.sendStatus(200)
 })
+
+analyzeImageResult = (result) => {
+
+}
 
 server.listen(PORT, () => console.log(`Server is listerning on port ${PORT}`))
