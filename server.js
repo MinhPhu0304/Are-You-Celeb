@@ -1,6 +1,7 @@
 const Express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const util = require('util') // Print out json object nice
 
 require('dotenv').config()
 const PORT = process.env.PORT || 3001 // Default  fall back port if no port variable is found 
@@ -35,13 +36,24 @@ server.post('/api/checkCeleb', (req,res) => {
     }
     request.post(option, ( error, respsonse, body) => {
         if(error) return console.log(error)
-        analyzeImageResult(body)
+        const result = analyzeImageResult(JSON.parse(body))
+        res.send(result)
         return res.sendStatus(200)
     })
 })
 
 analyzeImageResult = (result) => {
+    const imageCategories = result.categories // This will return an array so watch out
+    const peopleCategory = imageCategories.filter( element => element.name === 'people_' ) // The underscore is from Api result not me
+    if(peopleCategory){
+        let peopleDetail = peopleCategory.detail
+    } 
 
+    return 'No people found'
+}
+
+isThisPersonACeleb = ( personDetail ) => {
+    // Check it here
 }
 
 server.listen(PORT, () => console.log(`Server is listerning on port ${PORT}`))
