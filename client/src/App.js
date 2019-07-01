@@ -16,7 +16,7 @@ class App extends React.Component {
 
     this.state = {
       isAnalyzingPic: false,
-      analyzeResult: ''
+      analyzedResult: []
     }
   }
 
@@ -34,11 +34,15 @@ class App extends React.Component {
         }
       })
       .then( res => {
-        this.setState({ isAnalyzingPic: !this.state.isAnalyzingPic }, () => this.setState({ analyzeResult: res.data}))
+        this.setState({ isAnalyzingPic: !this.state.isAnalyzingPic },this.presentDataFound(res.data))
       })
     })
     this.setState({ isAnalyzingPic: true })
     fileReader.readAsBinaryString(image)
+  }
+
+  presentDataFound = data => {
+    this.setState({ analyzedResult: data })
   }
 
   render(){
@@ -71,7 +75,13 @@ class App extends React.Component {
           { this.state.isAnalyzingPic ? (<CircularProgress style={{margin: '10px'}}/>) : ''}
         </Grid>
         <Grid>
-          { this.state.analyzeResult === '' ? '' : <p>{this.state.analyzeResult}</p>}
+          { this.state.analyzedResult.length === 0 ? 
+            (<p> Let's see if Azure can iddentify any celebrities </p>) : 
+            this.state.analyzedResult.map(element => 
+              (<p>
+                Found {element} in the picture
+              </p>)) 
+          }
         </Grid>
       </div>
     );
