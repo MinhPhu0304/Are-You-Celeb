@@ -79,7 +79,7 @@ class App extends React.Component {
             (<p> Let's see if Azure can iddentify any celebrities </p>) : 
             this.state.analyzedResult.map(element => 
               (<p>
-                Found {element} in the picture
+                {element} 
               </p>)) 
           }
         </Grid>

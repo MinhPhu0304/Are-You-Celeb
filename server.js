@@ -51,7 +51,7 @@ analyzeImageResult = (result) => {
         peopleCategory.forEach(element => element.detail.celebrities.forEach(element => { celebArray.push(element)}))
         celebArray = celebArray.slice(1) // Bad hack to remove the first empty object
         if(celebArray.length > 0){
-            celebArray.forEach(element => celebNameResult.push(element.name))
+            celebArray.forEach(element => celebNameResult.push('Azure has found ' + element.name))
             return celebNameResult        
         }
         else {
