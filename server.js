@@ -43,18 +43,20 @@ server.post('/api/checkCeleb', (req,res) => {
 
 analyzeImageResult = (result) => {
     const imageCategories = result.categories // This will return an array so watch out
-    const peopleCategory = imageCategories.filter( element => element.name === 'people_' ) // The underscore is from Api result not me
-    let peopleDetail
-    let resultAnalyzed
+    const peoplePatternRegex = /people?.*/g // nasty but what it does is finding all sting that match the name that start with people
+    const peopleCategory = imageCategories.filter( element => element.name.match(peoplePatternRegex) )
+    let celebArray = [{}] // Dirty hack to create array of object
+    let celebNameResult = []
     if(peopleCategory){
-        peopleDetail = peopleCategory.detail
+        peopleCategory.forEach(element => element.detail.celebrities.forEach(element => { celebArray.push(element)}))
+        celebArray = celebArray.slice(1) // Bad hack to remove the first empty object
     } 
 
-    if(peopleDetail){
-        // Check if there is a field called celebrities
+    if(celebArray.length > 1){
+        celebArray.forEach(element => celebNameResult.push(element.name))
+        return celebNameResult        
     }
-
-    return 'No people found'
+    return 'No celebrities found'
 }
 
 server.listen(PORT, () => console.log(`Server is listerning on port ${PORT}`))
