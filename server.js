@@ -48,14 +48,18 @@ analyzeImageResult = (result) => {
     let celebArray = [{}] // Dirty hack to create array of object
     let celebNameResult = []
     if(peopleCategory){
-        peopleCategory.forEach(element => element.detail.celebrities.forEach(element => { celebArray.push(element)}))
+        peopleCategory.forEach(element => {
+            element.detail.celebrities.forEach(element => { 
+                celebArray.push(element)
+            })
+        })
         celebArray = celebArray.slice(1) // Bad hack to remove the first empty object
         if(celebArray.length > 0){
-            celebArray.forEach(element => celebNameResult.push('Azure has found ' + element.name))
+            celebArray.forEach(element => celebNameResult.push('Azure identified ' + element.name))
             return celebNameResult        
         }
         else {
-            return ['Looks like the person you upload is not a celebrity']
+            return ['Looks like the person you upload is not a celebrity. Perhaps try a picture of Margot Robbie instead']
         }
     }
     return ['Hmm, looks like the image you upload does not contain people in it']

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Dropzone from 'react-dropzone'
 
+import ResultPanel from './ResultPanel'
 import './App.css';
 import axios from 'axios'
 
@@ -76,11 +77,8 @@ class App extends React.Component {
         </Grid>
         <Grid>
           { this.state.analyzedResult.length === 0 ? 
-            (<p> Let's see if Azure can iddentify any celebrities </p>) : 
-            this.state.analyzedResult.map(element => 
-              (<p>
-                {element} 
-              </p>)) 
+            (<p> Nothing to show yet, perhaps try to drop some image </p>) : 
+              <ResultPanel result={this.state.analyzedResult} fullAnalyze='' />
           }
         </Grid>
       </div>
