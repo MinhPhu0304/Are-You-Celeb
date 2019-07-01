@@ -50,13 +50,15 @@ analyzeImageResult = (result) => {
     if(peopleCategory){
         peopleCategory.forEach(element => element.detail.celebrities.forEach(element => { celebArray.push(element)}))
         celebArray = celebArray.slice(1) // Bad hack to remove the first empty object
-    } 
-
-    if(celebArray.length > 1){
-        celebArray.forEach(element => celebNameResult.push(element.name))
-        return celebNameResult        
+        if(celebArray.length > 0){
+            celebArray.forEach(element => celebNameResult.push(element.name))
+            return celebNameResult        
+        }
+        else {
+            return ['Looks like the person you upload is not a celebrity']
+        }
     }
-    return 'No celebrities found'
+    return ['Hmm, looks like the image you upload does not contain people in it']
 }
 
 server.listen(PORT, () => console.log(`Server is listerning on port ${PORT}`))
