@@ -17,7 +17,8 @@ class App extends React.Component {
 
     this.state = {
       isAnalyzingPic: false,
-      analyzedResult: []
+      analyzedResult: [],
+      fullAnalyzeData: {},
     }
   }
 
@@ -43,7 +44,7 @@ class App extends React.Component {
   }
 
   presentDataFound = data => {
-    this.setState({ analyzedResult: data })
+    this.setState({ analyzedResult: data.result }, this.setState({ fullAnalyzeData: data.fullAnalyze}))
   }
 
   render(){
@@ -78,7 +79,7 @@ class App extends React.Component {
         <Grid>
           { this.state.analyzedResult.length === 0 ? 
             (<p> Nothing to show yet, perhaps try to drop some image </p>) : 
-              <ResultPanel result={this.state.analyzedResult} fullAnalyze='' />
+              <ResultPanel result={this.state.analyzedResult} fullAnalyze={this.state.fullAnalyzeData} />
           }
         </Grid>
       </div>

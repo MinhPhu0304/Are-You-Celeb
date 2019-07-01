@@ -1,0 +1,88 @@
+{
+    "categories": [
+      {
+        "name": "people_",
+        "score": 0.86328125,
+        "detail": {
+          "celebrities": [
+            {
+              "name": "Satya Nadella",
+              "faceRectangle": {
+                "left": 240,
+                "top": 294,
+                "width": 135,
+                "height": 135
+              },
+              "confidence": 0.99984323978424072
+            }
+          ],
+          "landmarks": null
+        }
+      }
+    ],
+    "adult": null,
+    "tags": [
+      {
+        "name": "human face",
+        "confidence": 0.95430314540863037
+      },
+      {
+        "name": "clothing",
+        "confidence": 0.86057531833648682
+      },
+      {
+        "name": "smile",
+        "confidence": 0.8601078987121582
+      },
+      {
+        "name": "outdoor",
+        "confidence": 0.860062301158905
+      },
+      {
+        "name": "glasses",
+        "confidence": 0.68438893556594849
+      }
+    ],
+    "description": {
+      "tags": [
+        "person",
+        "suit",
+        "man",
+        "dressed",
+        "phone",
+        "field"
+      ],
+      "captions": [
+        {
+          "text": "Satya Nadella wearing a suit and tie",
+          "confidence": 0.99032750982666984
+        }
+      ]
+    },
+    "faces": [
+      {
+        "age": 49,
+        "gender": "Male",
+        "faceRectangle": {
+          "left": 240,
+          "top": 294,
+          "width": 135,
+          "height": 135
+        }
+      }
+    ],
+    "color": {
+      "dominantColorForeground": "Black",
+      "dominantColorBackground": "Black",
+      "dominantColors": [
+        "Black",
+        "Grey"
+      ],
+      "accentColor": "7B5E50",
+      "isBWImg": false
+    },
+    "imageType": {
+      "clipArtType": 0,
+      "lineDrawingType": 0
+    }
+}

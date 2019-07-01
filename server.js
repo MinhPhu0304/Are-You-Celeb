@@ -1,7 +1,7 @@
 const Express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const util = require('util') // Print out json object nice
+const mockResponse = require('./mockRes.json')
 
 require('dotenv').config()
 const PORT = process.env.PORT || 3001 // Default  fall back port if no port variable is found 
@@ -37,7 +37,7 @@ server.post('/api/checkCeleb', (req,res) => {
     request.post(option, ( error, respsonse, body) => {
         if(error) return console.log(error)
         const result = analyzeImageResult(JSON.parse(body))
-        return res.status(200).send(result)
+        return res.json({ result: result, fullAnalyze: JSON.parse(body) }).status(200)
     })
 })
 

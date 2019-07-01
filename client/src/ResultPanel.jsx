@@ -8,10 +8,9 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 
 function TabContainer({ children, dir }) {
-    console.log(children)
     return children.map((element,index) =>
     (<Typography key={index} component='div' dir={dir} style={{ padding: 8 * 2 }}>
-            {element}
+            <pre>{element}</pre>
     </Typography>)
     )
 }
@@ -60,7 +59,7 @@ export default function ResultPanel(props) {
                             onChangeIndex={handleChangeIndex}>
                 <TabContainer dir={theme.direction}>{props.result}</TabContainer>
                 {/* Dirty hack to convert the json result to array because result props could be an array */}
-                <TabContainer dir={theme.direction}>{ new Array(props.fullAnalyze) }</TabContainer>
+                <TabContainer dir={theme.direction}>{ new Array(JSON.stringify(props.fullAnalyze,null, 1)) }</TabContainer>
             </SwipeableViews>
 
         </div>
