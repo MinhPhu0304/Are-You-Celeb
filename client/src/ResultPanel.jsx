@@ -5,21 +5,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-
-function TabContainer({ children, dir }) {
-    return children.map((element,index) =>
-    (<Typography key={index} component='div' dir={dir} style={{ padding: 8 * 2 }}>
-            <pre>{element}</pre>
-    </Typography>)
-    )
-}
-
-TabContainer.propTypes = {
-    children: PropTypes.node.isRequired,
-    dir: PropTypes.string.isRequired,
-  };
-
+import ReactJson from 'react-json-view'
+import TabContainer from './TabContainer'
 // Dump component. Only show the props pass down
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +34,7 @@ export default function ResultPanel(props) {
         <div className={classes.root}>
             <AppBar position="static" color="default">
                 <Tabs   value={tabIndex}   onChange={handleChange} indicatorColor="primary"
-                        textColor="primary" variant="fullWidth" centered>
+                        textColor="primary" variant="fullWidth">
 
                     <Tab label="Result" />
                     <Tab label="Full analyze" />
@@ -58,8 +45,7 @@ export default function ResultPanel(props) {
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={tabIndex}
                             onChangeIndex={handleChangeIndex}>
                 <TabContainer dir={theme.direction}>{props.result}</TabContainer>
-                {/* Dirty hack to convert the json result to array because result props could be an array */}
-                <TabContainer dir={theme.direction}>{ new Array(JSON.stringify(props.fullAnalyze,null, 1)) }</TabContainer>
+                <ReactJson src={props.fullAnalyze} enableClipboard={false} displayDataTypes={false} name={null} style={{ 'paddingTop': '10px' }}></ReactJson>
             </SwipeableViews>
 
         </div>
