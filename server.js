@@ -2,6 +2,7 @@ const Express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const mockResponse = require('./mockRes.json')
+const errorRes = require('./errorResMock.json') // Use either these 2 to test out the response without wasting api call for developlment
 
 require('dotenv').config()
 const PORT = process.env.PORT || 3001 // Default  fall back port if no port variable is found 
@@ -42,6 +43,7 @@ server.post('/api/checkCeleb', (req,res) => {
 })
 
 analyzeImageResult = (result) => {
+    if (result.code != null) return [`Error: ${result.message}`]
     const imageCategories = result.categories // This will return an array so watch out
     const peoplePatternRegex = /people?.*/g // nasty but what it does is finding all sting that match the name that start with people
     const peopleCategory = imageCategories.filter( element => element.name.match(peoplePatternRegex) )
